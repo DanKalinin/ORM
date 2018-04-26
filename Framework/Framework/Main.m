@@ -12,4 +12,8 @@
 
 @implementation ORM
 
++ (instancetype)container {
+    return nil;
+}
+
 @end
