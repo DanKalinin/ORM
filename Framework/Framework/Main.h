@@ -7,9 +7,39 @@
 //
 
 #import <CoreData/CoreData.h>
+#import <Helpers/Helpers.h>
+#import "PersistentContainer.h"
 
 
 
-@interface ORM : NSPersistentContainer
+
+
+
+
+
+
+
+@interface ORMLoad : Operation
+
+@property (readonly) PersistentContainer *container;
+
+- (instancetype)initWithContainer:(PersistentContainer *)container;
+
+@end
+
+
+
+
+
+
+
+
+
+
+@interface ORM : OperationQueue
+
+@property PersistentContainer *container;
+
+- (ORMLoad *)loadWithContainer:(PersistentContainer *)container;
 
 @end
