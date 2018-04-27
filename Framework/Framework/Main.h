@@ -23,6 +23,7 @@
 
 @protocol ORMLoadDelegate <OperationDelegate>
 
+@optional
 - (void)ORMLoadDidUpdateState:(ORMLoad *)load;
 - (void)ORMLoadDidUpdateProgress:(ORMLoad *)load;
 
@@ -37,6 +38,7 @@
 
 @interface ORMLoad : Operation <ORMLoadDelegate>
 
+@property (readonly) SurrogateArray<ORMLoadDelegate> *delegates;
 @property (readonly) PersistentContainer *container;
 
 - (instancetype)initWithContainer:(PersistentContainer *)container;
@@ -52,7 +54,13 @@
 
 
 
-@interface ORM : OperationQueue
+@protocol ORMDelegate <OperationDelegate>
+
+@end
+
+
+
+@interface ORM : OperationQueue <ORMDelegate>
 
 @property PersistentContainer *container;
 
