@@ -10,6 +10,7 @@
 #import <Helpers/Helpers.h>
 #import "PersistentContainer.h"
 
+@class ORMLoad, ORM;
 
 
 
@@ -19,7 +20,22 @@
 
 
 
-@interface ORMLoad : Operation
+
+@protocol ORMLoadDelegate <OperationDelegate>
+
+- (void)ORMLoadDidUpdateState:(ORMLoad *)load;
+- (void)ORMLoadDidUpdateProgress:(ORMLoad *)load;
+
+- (void)ORMLoadDidBegin:(ORMLoad *)load;
+- (void)ORMLoadDidEnd:(ORMLoad *)load;
+
+- (void)ORMLoad:(ORMLoad *)load didEndStore:(NSPersistentStoreDescription *)store;
+
+@end
+
+
+
+@interface ORMLoad : Operation <ORMLoadDelegate>
 
 @property (readonly) PersistentContainer *container;
 
