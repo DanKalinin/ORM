@@ -95,8 +95,12 @@
 
 @implementation ORM
 
-- (ORMLoad *)loadWithContainer:(PersistentContainer *)container {
-    ORMLoad *load = [ORMLoad.alloc initWithContainer:container];
++ (instancetype)orm {
+    return nil;
+}
+
+- (ORMLoad *)load {
+    ORMLoad *load = [ORMLoad.alloc initWithContainer:self.container];
     [self addOperation:load];
     return load;
 }

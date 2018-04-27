@@ -64,6 +64,7 @@
 
 @property PersistentContainer *container;
 
-- (ORMLoad *)loadWithContainer:(PersistentContainer *)container;
++ (instancetype)orm;
+- (ORMLoad *)load;
 
 @end
