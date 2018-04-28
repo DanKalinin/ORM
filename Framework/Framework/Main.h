@@ -53,6 +53,27 @@
 
 
 
+@protocol ORMSyncDelegate <OperationDelegate>
+
+@end
+
+
+
+@interface ORMSync : Operation
+
+@property (readonly) SurrogateArray<ORMSyncDelegate> *delegates;
+
+@end
+
+
+
+
+
+
+
+
+
+
 @protocol ORMDelegate <OperationDelegate>
 
 @end
@@ -61,6 +82,7 @@
 
 @interface ORM : OperationQueue <ORMDelegate>
 
+@property Class syncClass;
 @property PersistentContainer *container;
 
 @property (readonly) SurrogateArray<ORMDelegate> *delegates;
