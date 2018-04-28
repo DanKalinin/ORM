@@ -94,6 +94,8 @@
 
 @implementation ORM
 
+@dynamic delegates;
+
 + (instancetype)orm {
     return nil;
 }

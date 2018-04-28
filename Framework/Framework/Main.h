@@ -63,6 +63,8 @@
 
 @property PersistentContainer *container;
 
+@property (readonly) SurrogateArray<ORMDelegate> *delegates;
+
 + (instancetype)orm;
 - (ORMLoad *)load;
 
