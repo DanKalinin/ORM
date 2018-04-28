@@ -98,4 +98,10 @@
     return nil;
 }
 
+- (ORMLoad *)load {
+    ORMLoad *load = [ORMLoad.alloc initWithContainer:self.container];
+    [self addOperation:load];
+    return load;
+}
+
 @end
