@@ -152,6 +152,14 @@
     return nil;
 }
 
+- (instancetype)init {
+    self = super.init;
+    if (self) {
+        self.syncClass = ORMSync.class;
+    }
+    return self;
+}
+
 - (ORMLoad *)load {
     ORMLoad *load = [ORMLoad.alloc initWithContainer:self.container];
     [self addOperation:load];
