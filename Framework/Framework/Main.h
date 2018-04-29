@@ -74,6 +74,7 @@
 @property (readonly) NSMutableArray<Class> *classes;
 
 - (instancetype)initWithClasses:(NSMutableArray<Class> *)classes;
+- (void)syncClass:(Class)class;
 
 @end
 

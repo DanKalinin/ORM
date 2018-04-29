@@ -108,6 +108,29 @@
     return self;
 }
 
+- (void)main {
+    [self updateState:OperationStateDidBegin];
+    [self updateProgress:0];
+    
+    while (!self.cancelled) {
+        if (self.classes.count == 0) break;
+        Class class = self.classes.firstObject;
+        [self syncClass:class];
+        if (self.errors.count == 0) {
+            [self.classes removeObjectAtIndex:0];
+            
+            uint64_t completedUnitCount = self.progress.completedUnitCount + 1;
+            [self updateProgress:completedUnitCount];
+            
+            [self.delegates ORMSync:self didEndClass:class];
+        } else {
+            break;
+        }
+    }
+    
+    [self updateState:OperationStateDidEnd];
+}
+
 #pragma mark - Helpers
 
 - (void)updateState:(OperationState)state {
@@ -125,6 +148,10 @@
     [super updateProgress:completedUnitCount];
     
     [self.delegates ORMSyncDidUpdateProgress:self];
+}
+
+- (void)syncClass:(Class)class {
+    NSLog(@"Class - %@", class);
 }
 
 @end
