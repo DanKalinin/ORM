@@ -108,6 +108,25 @@
     return self;
 }
 
+#pragma mark - Helpers
+
+- (void)updateState:(OperationState)state {
+    [super updateState:state];
+    
+    [self.delegates ORMSyncDidUpdateState:self];
+    if (state == OperationStateDidBegin) {
+        [self.delegates ORMSyncDidBegin:self];
+    } else if (state == OperationStateDidEnd) {
+        [self.delegates ORMSyncDidEnd:self];
+    }
+}
+
+- (void)updateProgress:(uint64_t)completedUnitCount {
+    [super updateProgress:completedUnitCount];
+    
+    [self.delegates ORMSyncDidUpdateProgress:self];
+}
+
 @end
 
 
