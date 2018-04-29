@@ -9,7 +9,7 @@
 #import <Helpers/Helpers.h>
 #import "PersistentContainer.h"
 
-@class ORMLoad, ORM;
+@class ORMLoad, ORMSync, ORM;
 
 
 
@@ -54,6 +54,15 @@
 
 
 @protocol ORMSyncDelegate <OperationDelegate>
+
+@optional
+- (void)ORMSyncDidUpdateState:(ORMSync *)sync;
+- (void)ORMSyncDidUpdateProgress:(ORMSync *)sync;
+
+- (void)ORMSyncDidBegin:(ORMSync *)sync;
+- (void)ORMSyncDidEnd:(ORMSync *)sync;
+
+- (void)ORMSync:(ORMSync *)sync didEndClass:(Class)cls;
 
 @end
 
