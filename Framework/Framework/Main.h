@@ -59,9 +59,12 @@
 
 
 
-@interface ORMSync : Operation
+@interface ORMSync : Operation <ORMSyncDelegate>
 
 @property (readonly) SurrogateArray<ORMSyncDelegate> *delegates;
+@property (readonly) NSMutableArray<Class> *classes;
+
+- (instancetype)initWithClasses:(NSMutableArray<Class> *)classes;
 
 @end
 
@@ -88,6 +91,11 @@
 @property (readonly) SurrogateArray<ORMDelegate> *delegates;
 
 + (instancetype)orm;
+
 - (ORMLoad *)load;
+- (ORMLoad *)load:(VoidBlock)completion;
+
+- (__kindof ORMSync *)syncClasses:(NSMutableArray<Class> *)classes;
+- (__kindof ORMSync *)syncClasses:(NSMutableArray<Class> *)classes completion:(VoidBlock)completion;
 
 @end

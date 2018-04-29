@@ -86,6 +86,39 @@
 
 
 
+@interface ORMSync ()
+
+@property NSMutableArray<Class> *classes;
+
+@end
+
+
+
+@implementation ORMSync
+
+@dynamic delegates;
+
+- (instancetype)initWithClasses:(NSMutableArray<Class> *)classes {
+    self = super.init;
+    if (self) {
+        self.classes = classes;
+        
+        self.progress.totalUnitCount = classes.count;
+    }
+    return self;
+}
+
+@end
+
+
+
+
+
+
+
+
+
+
 @interface ORM ()
 
 @end
@@ -104,6 +137,24 @@
     ORMLoad *load = [ORMLoad.alloc initWithContainer:self.container];
     [self addOperation:load];
     return load;
+}
+
+- (ORMLoad *)load:(VoidBlock)completion {
+    ORMLoad *load = [self load];
+    load.completionBlock = completion;
+    return load;
+}
+
+- (ORMSync *)syncClasses:(NSMutableArray<Class> *)classes {
+    ORMSync *sync = [self.syncClass.alloc initWithClasses:classes];
+    [self addOperation:sync];
+    return sync;
+}
+
+- (ORMSync *)syncClasses:(NSMutableArray<Class> *)classes completion:(VoidBlock)completion {
+    ORMSync *sync = [self syncClasses:classes];
+    sync.completionBlock = completion;
+    return sync;
 }
 
 @end
