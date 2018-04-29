@@ -62,7 +62,7 @@
 - (void)ORMSyncDidBegin:(ORMSync *)sync;
 - (void)ORMSyncDidEnd:(ORMSync *)sync;
 
-- (void)ORMSync:(ORMSync *)sync didEndClass:(Class)cls;
+- (void)ORMSync:(ORMSync *)sync didEndClass:(Class)class;
 
 @end
 
