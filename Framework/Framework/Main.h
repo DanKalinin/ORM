@@ -70,6 +70,7 @@
 
 @interface ORMSync : Operation <ORMSyncDelegate>
 
+@property (readonly) ORM *parent;
 @property (readonly) SurrogateArray<ORMSyncDelegate> *delegates;
 @property (readonly) NSMutableArray<Class> *classes;
 

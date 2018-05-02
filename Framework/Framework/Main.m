@@ -96,6 +96,7 @@
 
 @implementation ORMSync
 
+@dynamic parent;
 @dynamic delegates;
 
 - (instancetype)initWithClasses:(NSMutableArray<Class> *)classes {
