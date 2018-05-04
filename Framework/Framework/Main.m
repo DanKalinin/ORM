@@ -88,8 +88,8 @@
 
 @interface ORMSync ()
 
-//@property NSMutableArray<Class> *classes;
 @property NSMutableArray<id> *scopes;
+@property NSManagedObjectContext *context;
 
 @end
 
@@ -111,26 +111,40 @@
 }
 
 - (void)main {
-    [self updateState:OperationStateDidBegin];
-    [self updateProgress:0];
-    
-    while (!self.cancelled) {
-        if (self.scopes.count == 0) break;
-        id scope = self.scopes.firstObject;
-        [self syncScope:scope];
-        if (self.errors.count == 0) {
-            [self.scopes removeObjectAtIndex:0];
-            
-            uint64_t completedUnitCount = self.progress.completedUnitCount + 1;
-            [self updateProgress:completedUnitCount];
-            
-            [self.delegates ORMSync:self didEndScope:scope];
-        } else {
-            break;
+    self.context = [self.parent.container newBackgroundContext];
+    [self.context performBlockAndWait:^{
+        [self updateState:OperationStateDidBegin];
+        [self updateProgress:0];
+        
+        while (!self.cancelled) {
+            if (self.scopes.count == 0) break;
+            id scope = self.scopes.firstObject;
+            [self syncScope:scope];
+            if (self.errors.count == 0) {
+                [self.scopes removeObjectAtIndex:0];
+                
+                uint64_t completedUnitCount = self.progress.completedUnitCount + 1;
+                [self updateProgress:completedUnitCount];
+                
+                [self.delegates ORMSync:self didEndScope:scope];
+            } else {
+                break;
+            }
         }
-    }
-    
-    [self updateState:OperationStateDidEnd];
+        
+        if (self.cancelled) {
+        } else {
+            if (self.errors.count == 0) {
+                NSError *error = nil;
+                if ([self.context save:&error]) {
+                } else {
+                    [self.errors addObject:error];
+                }
+            }
+        }
+        
+        [self updateState:OperationStateDidEnd];
+    }];
 }
 
 #pragma mark - Helpers
@@ -176,10 +190,6 @@
 @implementation ORM
 
 @dynamic delegates;
-
-+ (instancetype)orm {
-    return nil;
-}
 
 - (ORMLoad *)load {
     ORMLoad *load = [ORMLoad.alloc initWithContainer:self.container];

@@ -73,6 +73,7 @@
 @property (readonly) ORM *parent;
 @property (readonly) SurrogateArray<ORMSyncDelegate> *delegates;
 @property (readonly) NSMutableArray<id> *scopes;
+@property (readonly) NSManagedObjectContext *context;
 
 - (instancetype)initWithScopes:(NSMutableArray<id> *)scopes;
 - (void)syncScope:(id)scope;
@@ -99,8 +100,6 @@
 @property PersistentContainer *container;
 
 @property (readonly) SurrogateArray<ORMDelegate> *delegates;
-
-+ (instancetype)orm;
 
 - (ORMLoad *)load;
 - (ORMLoad *)load:(VoidBlock)completion;
