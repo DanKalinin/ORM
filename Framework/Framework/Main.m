@@ -181,6 +181,34 @@
 
 
 
+@interface ORMPlistSync ()
+
+@end
+
+
+
+@implementation ORMPlistSync
+
+- (void)syncScope:(Class)scope {
+    NSURL *url = [scope.bundle URLForResource:[scope entity].name withExtension:ExtensionPlist];
+    NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:url];
+    for (NSMutableDictionary *dictionary in array) {
+        NSManagedObject<DictionaryDecodable> *object = [scope.alloc initWithContext:self.context];
+        [object fromDictionary:dictionary];
+    }
+}
+
+@end
+
+
+
+
+
+
+
+
+
+
 @interface ORM ()
 
 @end

@@ -9,7 +9,9 @@
 #import <Helpers/Helpers.h>
 #import "PersistentContainer.h"
 
-@class ORMLoad, ORMSync, ORM;
+@class ORMLoad, ORMSync, ORMPlistSync, ORM;
+
+typedef NSString * ORMScope NS_STRING_ENUM;
 
 
 
@@ -77,6 +79,19 @@
 
 - (instancetype)initWithScopes:(NSMutableArray<id> *)scopes;
 - (void)syncScope:(id)scope;
+
+@end
+
+
+
+
+
+
+
+
+
+
+@interface ORMPlistSync : ORMSync
 
 @end
 
