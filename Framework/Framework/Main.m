@@ -88,7 +88,8 @@
 
 @interface ORMSync ()
 
-@property NSMutableArray<Class> *classes;
+//@property NSMutableArray<Class> *classes;
+@property NSMutableArray<id> *scopes;
 
 @end
 
@@ -99,12 +100,12 @@
 @dynamic parent;
 @dynamic delegates;
 
-- (instancetype)initWithClasses:(NSMutableArray<Class> *)classes {
+- (instancetype)initWithScopes:(NSMutableArray<id> *)scopes {
     self = super.init;
     if (self) {
-        self.classes = classes;
+        self.scopes = scopes;
         
-        self.progress.totalUnitCount = classes.count;
+        self.progress.totalUnitCount = scopes.count;
     }
     return self;
 }
@@ -114,16 +115,16 @@
     [self updateProgress:0];
     
     while (!self.cancelled) {
-        if (self.classes.count == 0) break;
-        Class class = self.classes.firstObject;
-        [self syncClass:class];
+        if (self.scopes.count == 0) break;
+        id scope = self.scopes.firstObject;
+        [self syncScope:scope];
         if (self.errors.count == 0) {
-            [self.classes removeObjectAtIndex:0];
+            [self.scopes removeObjectAtIndex:0];
             
             uint64_t completedUnitCount = self.progress.completedUnitCount + 1;
             [self updateProgress:completedUnitCount];
             
-            [self.delegates ORMSync:self didEndClass:class];
+            [self.delegates ORMSync:self didEndScope:scope];
         } else {
             break;
         }
@@ -151,8 +152,8 @@
     [self.delegates ORMSyncDidUpdateProgress:self];
 }
 
-- (void)syncClass:(Class)class {
-    NSLog(@"Class - %@", class);
+- (void)syncScope:(id)scope {
+    NSLog(@"Scope - %@", scope);
 }
 
 @end
@@ -200,14 +201,14 @@
     return load;
 }
 
-- (ORMSync *)syncClasses:(NSMutableArray<Class> *)classes {
-    ORMSync *sync = [self.syncClass.alloc initWithClasses:classes];
+- (ORMSync *)syncScopes:(NSMutableArray<id> *)scopes {
+    ORMSync *sync = [self.syncClass.alloc initWithScopes:scopes];
     [self addOperation:sync];
     return sync;
 }
 
-- (ORMSync *)syncClasses:(NSMutableArray<Class> *)classes completion:(VoidBlock)completion {
-    ORMSync *sync = [self syncClasses:classes];
+- (ORMSync *)syncScopes:(NSMutableArray<id> *)scopes completion:(VoidBlock)completion {
+    ORMSync *sync = [self syncScopes:scopes];
     sync.completionBlock = completion;
     return sync;
 }

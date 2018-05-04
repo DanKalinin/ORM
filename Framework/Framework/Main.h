@@ -62,7 +62,7 @@
 - (void)ORMSyncDidBegin:(ORMSync *)sync;
 - (void)ORMSyncDidEnd:(ORMSync *)sync;
 
-- (void)ORMSync:(ORMSync *)sync didEndClass:(Class)class;
+- (void)ORMSync:(ORMSync *)sync didEndScope:(id)scope;
 
 @end
 
@@ -72,10 +72,10 @@
 
 @property (readonly) ORM *parent;
 @property (readonly) SurrogateArray<ORMSyncDelegate> *delegates;
-@property (readonly) NSMutableArray<Class> *classes;
+@property (readonly) NSMutableArray<id> *scopes;
 
-- (instancetype)initWithClasses:(NSMutableArray<Class> *)classes;
-- (void)syncClass:(Class)class;
+- (instancetype)initWithScopes:(NSMutableArray<id> *)scopes;
+- (void)syncScope:(id)scope;
 
 @end
 
@@ -106,7 +106,7 @@
 - (ORMLoad *)load;
 - (ORMLoad *)load:(VoidBlock)completion;
 
-- (__kindof ORMSync *)syncClasses:(NSMutableArray<Class> *)classes;
-- (__kindof ORMSync *)syncClasses:(NSMutableArray<Class> *)classes completion:(VoidBlock)completion;
+- (__kindof ORMSync *)syncScopes:(NSMutableArray<id> *)scopes;
+- (__kindof ORMSync *)syncScopes:(NSMutableArray<id> *)scopes completion:(VoidBlock)completion;
 
 @end
