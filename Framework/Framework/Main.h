@@ -96,7 +96,6 @@
 
 @interface ORM : OperationQueue <ORMDelegate>
 
-@property Class syncClass;
 @property PersistentContainer *container;
 
 @property (readonly) SurrogateArray<ORMDelegate> *delegates;
@@ -106,7 +105,7 @@
 - (ORMLoad *)load;
 - (ORMLoad *)load:(VoidBlock)completion;
 
-- (__kindof ORMSync *)syncScopes:(NSMutableArray<id> *)scopes;
-- (__kindof ORMSync *)syncScopes:(NSMutableArray<id> *)scopes completion:(VoidBlock)completion;
+- (__kindof ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes;
+- (__kindof ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes completion:(VoidBlock)completion;
 
 @end

@@ -181,14 +181,6 @@
     return nil;
 }
 
-- (instancetype)init {
-    self = super.init;
-    if (self) {
-        self.syncClass = ORMSync.class;
-    }
-    return self;
-}
-
 - (ORMLoad *)load {
     ORMLoad *load = [ORMLoad.alloc initWithContainer:self.container];
     [self addOperation:load];
@@ -201,14 +193,14 @@
     return load;
 }
 
-- (ORMSync *)syncScopes:(NSMutableArray<id> *)scopes {
-    ORMSync *sync = [self.syncClass.alloc initWithScopes:scopes];
+- (ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes {
+    ORMSync *sync = [syncClass.alloc initWithScopes:scopes];
     [self addOperation:sync];
     return sync;
 }
 
-- (ORMSync *)syncScopes:(NSMutableArray<id> *)scopes completion:(VoidBlock)completion {
-    ORMSync *sync = [self syncScopes:scopes];
+- (ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes completion:(VoidBlock)completion {
+    ORMSync *sync = [self sync:syncClass scopes:scopes];
     sync.completionBlock = completion;
     return sync;
 }
