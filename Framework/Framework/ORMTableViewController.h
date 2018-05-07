@@ -10,8 +10,10 @@
 
 
 
-@interface ORMTableViewController : TableViewController
+@interface ORMTableViewController : TableViewController <NSFetchedResultsControllerDelegate>
 
 @property NSFetchedResultsController *controller;
+
+@property IBInspectable UITableViewRowAnimation rowAnimation;
 
 @end
