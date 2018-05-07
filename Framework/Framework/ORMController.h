@@ -50,6 +50,7 @@ typedef NS_ENUM(NSUInteger, ORMChangeKind) {
 @interface ORMTableViewController : TableViewController <NSFetchedResultsControllerDelegate>
 
 @property NSFetchedResultsController *controller;
+@property BOOL userDrivenChange;
 
 @property IBInspectable UITableViewRowAnimation rowAnimation;
 
@@ -69,6 +70,7 @@ typedef NS_ENUM(NSUInteger, ORMChangeKind) {
 @interface ORMCollectionViewController : CollectionViewController <NSFetchedResultsControllerDelegate>
 
 @property NSFetchedResultsController *controller;
+@property BOOL userDrivenChange;
 
 @property IBInspectable BOOL itemAnimation;
 
