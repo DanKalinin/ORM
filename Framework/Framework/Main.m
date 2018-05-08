@@ -112,6 +112,7 @@
 
 - (void)main {
     self.context = [self.parent.container newBackgroundContext];
+    self.context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
     [self.context performBlockAndWait:^{
         [self updateState:OperationStateDidBegin];
         [self updateProgress:0];

@@ -77,6 +77,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        self.rowAnimation = UITableViewRowAnimationNone;
     }
     return self;
 }
@@ -98,7 +99,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSManagedObject *object = [self.controller objectAtIndexPath:indexPath];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.detailTextLabel.text = object.objectID.URIRepresentation.absoluteString;
+    cell.textLabel.text = object.objectID.URIRepresentation.absoluteString;
     return cell;
 }
 
