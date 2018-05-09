@@ -23,7 +23,8 @@
     NSString *key = [NSString stringWithFormat:@"%@.%@", NSStringFromClass(NSFetchRequest.class), name];
     NSString *value = request.entity.userInfo[key];
     if (value) {
-        NSURLComponents *components = [NSURLComponents componentsWithString:value];
+        NSURLComponents *components = NSURLComponents.new;
+        components.query = value;
         NSMutableArray *descriptors = NSMutableArray.array;
         for (NSURLQueryItem *item in components.queryItems) {
             NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:item.name ascending:item.value.boolValue];
