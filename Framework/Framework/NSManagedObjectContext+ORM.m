@@ -11,11 +11,6 @@
 
 @implementation NSManagedObjectContext (ORM)
 
-- (NSManagedObject *)find:(NSFetchRequest *)request error:(NSError **)error {
-    NSArray *objects = [self executeFetchRequest:request error:error];
-    return objects.firstObject;
-}
-
 - (NSManagedObject *)findOrCreate:(NSFetchRequest *)request error:(NSError **)error {
     NSArray *objects = [self executeFetchRequest:request error:error];
     if (objects) {

@@ -11,7 +11,6 @@
 
 @interface NSManagedObjectContext (ORM)
 
-- (__kindof NSManagedObject *)find:(NSFetchRequest *)request error:(NSError **)error;
 - (__kindof NSManagedObject *)findOrCreate:(NSFetchRequest *)request error:(NSError **)error;
 
 @end
