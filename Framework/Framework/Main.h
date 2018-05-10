@@ -12,6 +12,7 @@
 @class ORMLoad, ORMSync, ORMPlistSync, ORM;
 
 typedef NSString * ORMScope NS_STRING_ENUM;
+typedef NSString * ORMRequest NS_STRING_ENUM;
 
 
 
