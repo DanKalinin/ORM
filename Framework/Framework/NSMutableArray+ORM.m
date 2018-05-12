@@ -6,12 +6,18 @@
 //
 
 #import "NSMutableArray+ORM.h"
+#import <Helpers/Helpers.h>
 
 
 
 @implementation NSMutableArray (ORM)
 
 - (instancetype)executeFetchRequest:(NSFetchRequest *)request {
+    if (request.entity) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", KeyEntity, request.entity];
+        [self filterUsingPredicate:predicate];
+    }
+    
     if (request.predicate) {
         [self filterUsingPredicate:request.predicate];
     }
