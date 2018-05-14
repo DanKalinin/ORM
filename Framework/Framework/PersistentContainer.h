@@ -7,6 +7,8 @@
 
 #import <CoreData/CoreData.h>
 
+@class PersistentContainer;
+
 
 
 @interface PersistentContainer : NSPersistentContainer
