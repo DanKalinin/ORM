@@ -11,6 +11,9 @@
 
 @interface PersistentContainer : NSPersistentContainer
 
+@property (readonly, nonatomic) NSManagedObjectContext *syncContext;
+@property (readonly, nonatomic) NSManagedObjectContext *uiContext;
+
 - (instancetype)initWithName:(NSString *)name bundle:(NSBundle *)bundle;
 
 @end

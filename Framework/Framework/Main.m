@@ -89,7 +89,6 @@
 @interface ORMSync ()
 
 @property NSMutableArray<id> *scopes;
-@property NSManagedObjectContext *context;
 
 @end
 
@@ -111,9 +110,7 @@
 }
 
 - (void)main {
-    self.context = [self.parent.container newBackgroundContext];
-    self.context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
-    [self.context performBlockAndWait:^{
+    [self.parent.container.syncContext performBlockAndWait:^{
         [self updateState:OperationStateDidBegin];
         [self updateProgress:0];
         
@@ -137,7 +134,7 @@
         } else {
             if (self.errors.count == 0) {
                 NSError *error = nil;
-                if ([self.context save:&error]) {
+                if ([self.parent.container.syncContext save:&error]) {
                 } else {
                     [self.errors addObject:error];
                 }
@@ -146,6 +143,42 @@
         
         [self updateState:OperationStateDidEnd];
     }];
+    
+//    self.context = [self.parent.container newBackgroundContext];
+//    self.context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+//    [self.context performBlockAndWait:^{
+//        [self updateState:OperationStateDidBegin];
+//        [self updateProgress:0];
+//
+//        while (!self.cancelled) {
+//            if (self.scopes.count == 0) break;
+//            id scope = self.scopes.firstObject;
+//            [self syncScope:scope];
+//            if (self.errors.count == 0) {
+//                [self.scopes removeObjectAtIndex:0];
+//
+//                uint64_t completedUnitCount = self.progress.completedUnitCount + 1;
+//                [self updateProgress:completedUnitCount];
+//
+//                [self.delegates ORMSync:self didEndScope:scope];
+//            } else {
+//                break;
+//            }
+//        }
+//
+//        if (self.cancelled) {
+//        } else {
+//            if (self.errors.count == 0) {
+//                NSError *error = nil;
+//                if ([self.context save:&error]) {
+//                } else {
+//                    [self.errors addObject:error];
+//                }
+//            }
+//        }
+//
+//        [self updateState:OperationStateDidEnd];
+//    }];
 }
 
 #pragma mark - Helpers
@@ -194,7 +227,7 @@
     NSURL *url = [scope.bundle URLForResource:[scope entity].name withExtension:ExtensionPlist];
     NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:url];
     for (NSMutableDictionary *dictionary in array) {
-        NSManagedObject<DictionaryDecodable> *object = [scope.alloc initWithContext:self.context];
+        NSManagedObject<DictionaryDecodable> *object = [scope.alloc initWithContext:self.parent.container.syncContext];
         [object fromDictionary:dictionary];
     }
 }
