@@ -34,6 +34,7 @@
     if (_syncContext) {
     } else {
         _syncContext = self.newBackgroundContext;
+        _syncContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
     }
     return _syncContext;
 }
