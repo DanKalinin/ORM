@@ -25,9 +25,15 @@
     self = [super initWithName:name managedObjectModel:model];
     if (self) {
         self.syncContext = self.newBackgroundContext;
+        self.syncContext.retainsRegisteredObjects = YES;
+        self.syncContext.automaticallyMergesChangesFromParent = YES;
+        self.syncContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
         
         self.uiContext = [NSManagedObjectContext.alloc initWithConcurrencyType:NSMainQueueConcurrencyType];
         self.uiContext.parentContext = self.syncContext;
+        self.uiContext.retainsRegisteredObjects = YES;
+        self.uiContext.automaticallyMergesChangesFromParent = YES;
+        self.uiContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
     }
     return self;
 }
