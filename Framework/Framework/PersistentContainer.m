@@ -12,8 +12,7 @@
 
 @interface PersistentContainer ()
 
-@property NSManagedObjectContext *syncContext;
-@property NSManagedObjectContext *uiContext;
+@property ManagedObjectContext *context;
 
 @end
 
@@ -24,16 +23,7 @@
 - (instancetype)initWithName:(NSString *)name managedObjectModel:(NSManagedObjectModel *)model {
     self = [super initWithName:name managedObjectModel:model];
     if (self) {
-        self.syncContext = self.newBackgroundContext;
-        self.syncContext.retainsRegisteredObjects = YES;
-        self.syncContext.automaticallyMergesChangesFromParent = YES;
-        self.syncContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
-        
-        self.uiContext = [NSManagedObjectContext.alloc initWithConcurrencyType:NSMainQueueConcurrencyType];
-        self.uiContext.parentContext = self.syncContext;
-        self.uiContext.retainsRegisteredObjects = YES;
-        self.uiContext.automaticallyMergesChangesFromParent = YES;
-        self.uiContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+        self.context = self.newContext;
     }
     return self;
 }
@@ -43,6 +33,18 @@
     NSManagedObjectModel *model = [NSManagedObjectModel.alloc initWithContentsOfURL:url];
     self = [self initWithName:name managedObjectModel:model];
     return self;
+}
+
+- (ManagedObjectContext *)newBackgroundContext {
+    ManagedObjectContext *context = [ManagedObjectContext.alloc initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    context.persistentStoreCoordinator = self.persistentStoreCoordinator;
+    return context;
+}
+
+- (ManagedObjectContext *)newContext {
+    ManagedObjectContext *context = [ManagedObjectContext.alloc initWithConcurrencyType:NSMainQueueConcurrencyType];
+    context.parentContext = self.newBackgroundContext;
+    return context;
 }
 
 @end

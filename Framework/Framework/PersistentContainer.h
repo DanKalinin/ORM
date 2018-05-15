@@ -6,6 +6,7 @@
 //
 
 #import <CoreData/CoreData.h>
+#import "ManagedObjectContext.h"
 
 @class PersistentContainer;
 
@@ -13,9 +14,11 @@
 
 @interface PersistentContainer : NSPersistentContainer
 
-@property (readonly) NSManagedObjectContext *syncContext;
-@property (readonly) NSManagedObjectContext *uiContext;
+@property (readonly) ManagedObjectContext *context;
 
 - (instancetype)initWithName:(NSString *)name bundle:(NSBundle *)bundle;
+
+- (ManagedObjectContext *)newBackgroundContext;
+- (ManagedObjectContext *)newContext;
 
 @end

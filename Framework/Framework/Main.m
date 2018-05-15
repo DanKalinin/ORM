@@ -110,7 +110,7 @@
 }
 
 - (void)main {
-    [self.parent.container.syncContext performBlockAndWait:^{
+    [self.parent.container.context.parentContext performBlockAndWait:^{
         [self updateState:OperationStateDidBegin];
         [self updateProgress:0];
         
@@ -134,7 +134,7 @@
         } else {
             if (self.errors.count == 0) {
                 NSError *error = nil;
-                if ([self.parent.container.syncContext save:&error]) {
+                if ([self.parent.container.context.parentContext save:&error]) {
                 } else {
                     [self.errors addObject:error];
                 }
@@ -227,7 +227,7 @@
     NSURL *url = [scope.bundle URLForResource:[scope entity].name withExtension:ExtensionPlist];
     NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:url];
     for (NSMutableDictionary *dictionary in array) {
-        NSManagedObject<DictionaryDecodable> *object = [scope.alloc initWithContext:self.parent.container.syncContext];
+        NSManagedObject<DictionaryDecodable> *object = [scope.alloc initWithContext:self.parent.container.context.parentContext];
         [object fromDictionary:dictionary];
     }
 }
