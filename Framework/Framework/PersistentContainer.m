@@ -23,7 +23,8 @@
 - (instancetype)initWithName:(NSString *)name managedObjectModel:(NSManagedObjectModel *)model {
     self = [super initWithName:name managedObjectModel:model];
     if (self) {
-        self.context = self.newContext;
+        self.context = [ManagedObjectContext.alloc initWithConcurrencyType:NSMainQueueConcurrencyType];
+        self.context.parentContext = self.newSyncContext;
     }
     return self;
 }
@@ -35,15 +36,9 @@
     return self;
 }
 
-- (ManagedObjectContext *)newBackgroundContext {
+- (ManagedObjectContext *)newSyncContext {
     ManagedObjectContext *context = [ManagedObjectContext.alloc initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     context.persistentStoreCoordinator = self.persistentStoreCoordinator;
-    return context;
-}
-
-- (ManagedObjectContext *)newContext {
-    ManagedObjectContext *context = [ManagedObjectContext.alloc initWithConcurrencyType:NSMainQueueConcurrencyType];
-    context.parentContext = self.newBackgroundContext;
     return context;
 }
 
