@@ -22,7 +22,7 @@
     if (self) {
         self.retainsRegisteredObjects = YES;
         self.automaticallyMergesChangesFromParent = YES;
-        self.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+        self.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrumpMergePolicy;
     }
     return self;
 }
