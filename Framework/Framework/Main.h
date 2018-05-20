@@ -115,8 +115,6 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 
 @property (readonly) SurrogateArray<ORMDelegate> *delegates;
 
-+ (instancetype)orm;
-
 - (ORMLoad *)load;
 - (ORMLoad *)load:(VoidBlock)completion;
 

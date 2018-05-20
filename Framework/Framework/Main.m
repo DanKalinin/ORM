@@ -217,15 +217,6 @@
 
 @dynamic delegates;
 
-+ (instancetype)orm {
-    static ORM *orm = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        orm = self.new;
-    });
-    return orm;
-}
-
 - (ORMLoad *)load {
     ORMLoad *load = [ORMLoad.alloc initWithContainer:self.container];
     [self addOperation:load];
