@@ -27,7 +27,7 @@
 
 - (BOOL)commit:(NSError **)error {
     NSManagedObjectContext *context = self;
-    while (context.parentContext) {
+    while (context) {
         if ([context save:error]) {
             context = context.parentContext;
         } else {

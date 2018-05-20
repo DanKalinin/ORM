@@ -17,6 +17,6 @@
 @property (readonly) ManagedObjectContext *context;
 
 - (instancetype)initWithName:(NSString *)name bundle:(NSBundle *)bundle;
-- (ManagedObjectContext *)newSyncContext;
+- (ManagedObjectContext *)contextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct;
 
 @end
