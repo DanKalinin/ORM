@@ -191,7 +191,7 @@
     NSURL *url = [scope.bundle URLForResource:[scope entity].name withExtension:ExtensionPlist];
     NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:url];
     for (NSMutableDictionary *dictionary in array) {
-        NSManagedObject<DictionaryDecodable> *object = [scope.alloc initWithContext:self.parent.container.context.parentContext];
+        NSManagedObject<HLPDictionaryDecodable> *object = [scope.alloc initWithContext:self.parent.container.context.parentContext];
         [object fromDictionary:dictionary];
     }
 }
