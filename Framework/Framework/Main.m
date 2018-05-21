@@ -39,7 +39,7 @@
 }
 
 - (void)main {
-    [self updateState:OperationStateDidBegin];
+    [self updateState:HLPOperationStateDidBegin];
     [self updateProgress:0];
     
     [self.container loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *store, NSError *error) {
@@ -53,18 +53,18 @@
         [self.delegates ORMLoad:self didEndStore:store];
     }];
     
-    [self updateState:OperationStateDidEnd];
+    [self updateState:HLPOperationStateDidEnd];
 }
 
 #pragma mark - Helpers
 
-- (void)updateState:(OperationState)state {
+- (void)updateState:(HLPOperationState)state {
     [super updateState:state];
     
     [self.delegates ORMLoadDidUpdateState:self];
-    if (state == OperationStateDidBegin) {
+    if (state == HLPOperationStateDidBegin) {
         [self.delegates ORMLoadDidBegin:self];
-    } else if (state == OperationStateDidEnd) {
+    } else if (state == HLPOperationStateDidEnd) {
         [self.delegates ORMLoadDidEnd:self];
     }
 }
@@ -111,7 +111,7 @@
 
 - (void)main {
     [self.parent.container.context.parentContext performBlockAndWait:^{
-        [self updateState:OperationStateDidBegin];
+        [self updateState:HLPOperationStateDidBegin];
         [self updateProgress:0];
         
         while (!self.cancelled) {
@@ -141,19 +141,19 @@
             }
         }
         
-        [self updateState:OperationStateDidEnd];
+        [self updateState:HLPOperationStateDidEnd];
     }];
 }
 
 #pragma mark - Helpers
 
-- (void)updateState:(OperationState)state {
+- (void)updateState:(HLPOperationState)state {
     [super updateState:state];
     
     [self.delegates ORMSyncDidUpdateState:self];
-    if (state == OperationStateDidBegin) {
+    if (state == HLPOperationStateDidBegin) {
         [self.delegates ORMSyncDidBegin:self];
-    } else if (state == OperationStateDidEnd) {
+    } else if (state == HLPOperationStateDidEnd) {
         [self.delegates ORMSyncDidEnd:self];
     }
 }

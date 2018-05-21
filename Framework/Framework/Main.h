@@ -22,7 +22,7 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 
 
 
-@protocol ORMLoadDelegate <OperationDelegate>
+@protocol ORMLoadDelegate <HLPOperationDelegate>
 
 @optional
 - (void)ORMLoadDidUpdateState:(ORMLoad *)load;
@@ -37,7 +37,7 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 
 
 
-@interface ORMLoad : Operation <ORMLoadDelegate>
+@interface ORMLoad : HLPOperation <ORMLoadDelegate>
 
 @property (readonly) SurrogateArray<ORMLoadDelegate> *delegates;
 @property (readonly) PersistentContainer *container;
@@ -55,7 +55,7 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 
 
 
-@protocol ORMSyncDelegate <OperationDelegate>
+@protocol ORMSyncDelegate <HLPOperationDelegate>
 
 @optional
 - (void)ORMSyncDidUpdateState:(ORMSync *)sync;
@@ -70,7 +70,7 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 
 
 
-@interface ORMSync : Operation <ORMSyncDelegate>
+@interface ORMSync : HLPOperation <ORMSyncDelegate>
 
 @property (readonly) ORM *parent;
 @property (readonly) SurrogateArray<ORMSyncDelegate> *delegates;
@@ -103,13 +103,13 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 
 
 
-@protocol ORMDelegate <OperationDelegate>
+@protocol ORMDelegate <HLPOperationDelegate>
 
 @end
 
 
 
-@interface ORM : OperationQueue <ORMDelegate>
+@interface ORM : HLPOperationQueue <ORMDelegate>
 
 @property PersistentContainer *container;
 
