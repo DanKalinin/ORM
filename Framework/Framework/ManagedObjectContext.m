@@ -6,6 +6,7 @@
 //
 
 #import "ManagedObjectContext.h"
+#import "MergePolicy.h"
 
 
 
@@ -22,7 +23,7 @@
     if (self) {
         self.retainsRegisteredObjects = YES;
         self.automaticallyMergesChangesFromParent = YES;
-        self.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrumpMergePolicy;
+        self.mergePolicy = [MergePolicy.alloc initWithMergeType:NSMergeByPropertyObjectTrumpMergePolicyType];
     }
     return self;
 }
