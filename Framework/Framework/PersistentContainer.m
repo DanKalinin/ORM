@@ -12,7 +12,7 @@
 
 @interface PersistentContainer ()
 
-@property ManagedObjectContext *context;
+@property ORMManagedObjectContext *context;
 
 @end
 
@@ -23,7 +23,7 @@
 - (instancetype)initWithName:(NSString *)name managedObjectModel:(NSManagedObjectModel *)model {
     self = [super initWithName:name managedObjectModel:model];
     if (self) {
-        self.context = [ManagedObjectContext.alloc initWithConcurrencyType:NSMainQueueConcurrencyType];
+        self.context = [ORMManagedObjectContext.alloc initWithConcurrencyType:NSMainQueueConcurrencyType];
         self.context.parentContext = [self contextWithConcurrencyType:NSPrivateQueueConcurrencyType];
     }
     return self;
@@ -36,8 +36,8 @@
     return self;
 }
 
-- (ManagedObjectContext *)contextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct {
-    ManagedObjectContext *context = [ManagedObjectContext.alloc initWithConcurrencyType:ct];
+- (ORMManagedObjectContext *)contextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct {
+    ORMManagedObjectContext *context = [ORMManagedObjectContext.alloc initWithConcurrencyType:ct];
     context.persistentStoreCoordinator = self.persistentStoreCoordinator;
     return context;
 }

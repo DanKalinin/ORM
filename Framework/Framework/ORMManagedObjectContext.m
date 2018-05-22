@@ -1,11 +1,48 @@
 //
-//  NSManagedObjectContext+ORM.m
+//  ORMManagedObjectContext.m
 //  ORM
 //
-//  Created by Dan Kalinin on 5/6/18.
+//  Created by Dan Kalinin on 5/15/18.
 //
 
-#import "NSManagedObjectContext+ORM.h"
+#import "ORMManagedObjectContext.h"
+#import "MergePolicy.h"
+
+
+
+
+
+
+
+
+
+
+@interface ORMManagedObjectContext ()
+
+@end
+
+
+
+@implementation ORMManagedObjectContext
+
+- (instancetype)initWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct {
+    self = [super initWithConcurrencyType:ct];
+    if (self) {
+        self.retainsRegisteredObjects = YES;
+        self.automaticallyMergesChangesFromParent = YES;
+        self.mergePolicy = [MergePolicy.alloc initWithMergeType:NSMergeByPropertyObjectTrumpMergePolicyType];
+    }
+    return self;
+}
+
+@end
+
+
+
+
+
+
+
 
 
 

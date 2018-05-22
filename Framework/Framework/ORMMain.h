@@ -1,5 +1,5 @@
 //
-//  Main.h
+//  ORMMain.h
 //  ORM
 //
 //  Created by Dan Kalinin on 4/28/18.

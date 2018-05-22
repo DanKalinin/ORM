@@ -1,11 +1,11 @@
 //
-//  Main.m
+//  ORMMain.m
 //  ORM
 //
 //  Created by Dan Kalinin on 4/28/18.
 //
 
-#import "Main.h"
+#import "ORMMain.h"
 
 
 

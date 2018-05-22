@@ -6,7 +6,7 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "ManagedObjectContext.h"
+#import "ORMManagedObjectContext.h"
 
 @class PersistentContainer;
 
@@ -14,9 +14,9 @@
 
 @interface PersistentContainer : NSPersistentContainer
 
-@property (readonly) ManagedObjectContext *context;
+@property (readonly) ORMManagedObjectContext *context;
 
 - (instancetype)initWithName:(NSString *)name bundle:(NSBundle *)bundle;
-- (ManagedObjectContext *)contextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct;
+- (ORMManagedObjectContext *)contextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct;
 
 @end

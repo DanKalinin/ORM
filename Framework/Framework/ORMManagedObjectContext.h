@@ -1,11 +1,33 @@
 //
-//  NSManagedObjectContext+ORM.h
+//  ORMManagedObjectContext.h
 //  ORM
 //
-//  Created by Dan Kalinin on 5/6/18.
+//  Created by Dan Kalinin on 5/15/18.
 //
 
 #import <CoreData/CoreData.h>
+
+@class ORMManagedObjectContext;
+
+
+
+
+
+
+
+
+
+
+@interface ORMManagedObjectContext : NSManagedObjectContext
+
+@end
+
+
+
+
+
+
+
 
 
 
