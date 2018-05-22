@@ -14,7 +14,7 @@ FOUNDATION_EXPORT const unsigned char ORMVersionString[];
 #import <ORM/ORMMain.h>
 #import <ORM/PersistentContainer.h>
 #import <ORM/ORMManagedObjectContext.h>
-#import <ORM/MergePolicy.h>
+#import <ORM/ORMMergePolicy.h>
 #import <ORM/ORMController.h>
 #import <ORM/NSManagedObjectModel+ORM.h>
 #import <ORM/NSArray+ORM.h>

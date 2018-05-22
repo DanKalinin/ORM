@@ -1,5 +1,5 @@
 //
-//  MergePolicy.h
+//  ORMMergePolicy.h
 //  ORM
 //
 //  Created by Dan Kalinin on 5/21/18.
@@ -9,6 +9,6 @@
 
 
 
-@interface MergePolicy : NSMergePolicy
+@interface ORMMergePolicy : NSMergePolicy
 
 @end

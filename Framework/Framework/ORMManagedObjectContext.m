@@ -6,7 +6,7 @@
 //
 
 #import "ORMManagedObjectContext.h"
-#import "MergePolicy.h"
+#import "ORMMergePolicy.h"
 
 
 
@@ -30,7 +30,7 @@
     if (self) {
         self.retainsRegisteredObjects = YES;
         self.automaticallyMergesChangesFromParent = YES;
-        self.mergePolicy = [MergePolicy.alloc initWithMergeType:NSMergeByPropertyObjectTrumpMergePolicyType];
+        self.mergePolicy = [ORMMergePolicy.alloc initWithMergeType:NSMergeByPropertyObjectTrumpMergePolicyType];
     }
     return self;
 }

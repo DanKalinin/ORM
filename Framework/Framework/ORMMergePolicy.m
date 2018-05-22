@@ -1,15 +1,21 @@
 //
-//  MergePolicy.m
+//  ORMMergePolicy.m
 //  ORM
 //
 //  Created by Dan Kalinin on 5/21/18.
 //
 
-#import "MergePolicy.h"
+#import "ORMMergePolicy.h"
 
 
 
-@implementation MergePolicy
+@interface ORMMergePolicy ()
+
+@end
+
+
+
+@implementation ORMMergePolicy
 
 - (BOOL)resolveConflicts:(NSArray *)list error:(NSError **)error {
     BOOL result = [super resolveConflicts:list error:error];
