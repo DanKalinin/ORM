@@ -1,11 +1,11 @@
 //
-//  NSManagedObjectModel+ORM.m
+//  ORMManagedObjectModel.m
 //  ORM
 //
 //  Created by Dan Kalinin on 5/9/18.
 //
 
-#import "NSManagedObjectModel+ORM.h"
+#import "ORMManagedObjectModel.h"
 #import <Helpers/Helpers.h>
 
 

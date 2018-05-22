@@ -1,5 +1,5 @@
 //
-//  NSManagedObjectModel+ORM.h
+//  ORMManagedObjectModel.h
 //  ORM
 //
 //  Created by Dan Kalinin on 5/9/18.

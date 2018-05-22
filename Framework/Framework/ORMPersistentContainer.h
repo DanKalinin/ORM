@@ -1,5 +1,5 @@
 //
-//  PersistentContainer.h
+//  ORMPersistentContainer.h
 //  ORM
 //
 //  Created by Dan Kalinin on 4/28/18.
@@ -8,11 +8,11 @@
 #import <CoreData/CoreData.h>
 #import "ORMManagedObjectContext.h"
 
-@class PersistentContainer;
+@class ORMPersistentContainer;
 
 
 
-@interface PersistentContainer : NSPersistentContainer
+@interface ORMPersistentContainer : NSPersistentContainer
 
 @property (readonly) ORMManagedObjectContext *context;
 

@@ -12,9 +12,9 @@ FOUNDATION_EXPORT double ORMVersionNumber;
 FOUNDATION_EXPORT const unsigned char ORMVersionString[];
 
 #import <ORM/ORMMain.h>
-#import <ORM/PersistentContainer.h>
+#import <ORM/ORMPersistentContainer.h>
+#import <ORM/ORMManagedObjectModel.h>
 #import <ORM/ORMManagedObjectContext.h>
 #import <ORM/ORMMergePolicy.h>
 #import <ORM/ORMController.h>
-#import <ORM/NSManagedObjectModel+ORM.h>
-#import <ORM/NSArray+ORM.h>
+#import <ORM/ORMArray.h>

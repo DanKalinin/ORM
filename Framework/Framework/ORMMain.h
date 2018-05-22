@@ -7,7 +7,7 @@
 
 #import <CoreData/CoreData.h>
 #import <Helpers/Helpers.h>
-#import "PersistentContainer.h"
+#import "ORMPersistentContainer.h"
 
 @class ORMLoad, ORMSync, ORMPlistSync, ORM;
 
@@ -40,9 +40,9 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 @interface ORMLoad : HLPOperation <ORMLoadDelegate>
 
 @property (readonly) SurrogateArray<ORMLoadDelegate> *delegates;
-@property (readonly) PersistentContainer *container;
+@property (readonly) ORMPersistentContainer *container;
 
-- (instancetype)initWithContainer:(PersistentContainer *)container;
+- (instancetype)initWithContainer:(ORMPersistentContainer *)container;
 
 @end
 
@@ -111,7 +111,7 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 
 @interface ORM : HLPOperationQueue <ORMDelegate>
 
-@property PersistentContainer *container;
+@property ORMPersistentContainer *container;
 
 @property (readonly) SurrogateArray<ORMDelegate> *delegates;
 

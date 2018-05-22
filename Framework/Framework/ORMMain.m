@@ -18,7 +18,7 @@
 
 @interface ORMLoad ()
 
-@property PersistentContainer *container;
+@property ORMPersistentContainer *container;
 
 @end
 
@@ -28,7 +28,7 @@
 
 @dynamic delegates;
 
-- (instancetype)initWithContainer:(PersistentContainer *)container {
+- (instancetype)initWithContainer:(ORMPersistentContainer *)container {
     self = super.init;
     if (self) {
         self.container = container;

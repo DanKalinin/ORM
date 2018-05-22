@@ -1,11 +1,11 @@
 //
-//  NSArray+ORM.m
+//  ORMArray.m
 //  ORM
 //
 //  Created by Dan Kalinin on 5/12/18.
 //
 
-#import "NSArray+ORM.h"
+#import "ORMArray.h"
 #import <Helpers/Helpers.h>
 
 

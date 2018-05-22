@@ -1,16 +1,16 @@
 //
-//  PersistentContainer.m
+//  ORMPersistentContainer.m
 //  ORM
 //
 //  Created by Dan Kalinin on 4/28/18.
 //
 
-#import "PersistentContainer.h"
+#import "ORMPersistentContainer.h"
 #import <Helpers/Helpers.h>
 
 
 
-@interface PersistentContainer ()
+@interface ORMPersistentContainer ()
 
 @property ORMManagedObjectContext *context;
 
@@ -18,7 +18,7 @@
 
 
 
-@implementation PersistentContainer
+@implementation ORMPersistentContainer
 
 - (instancetype)initWithName:(NSString *)name managedObjectModel:(NSManagedObjectModel *)model {
     self = [super initWithName:name managedObjectModel:model];

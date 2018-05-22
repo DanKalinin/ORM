@@ -1,5 +1,5 @@
 //
-//  NSArray+ORM.h
+//  ORMArray.h
 //  ORM
 //
 //  Created by Dan Kalinin on 5/12/18.
