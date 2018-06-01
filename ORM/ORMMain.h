@@ -75,8 +75,10 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 @property (readonly) ORM *parent;
 @property (readonly) SurrogateArray<ORMSyncDelegate> *delegates;
 @property (readonly) NSMutableArray<id> *scopes;
+@property (readonly) ORMManagedObjectContext *parentContext;
+@property (readonly) ORMManagedObjectContext *context;
 
-- (instancetype)initWithScopes:(NSMutableArray<id> *)scopes;
+- (instancetype)initWithScopes:(NSMutableArray<id> *)scopes parentContext:(ORMManagedObjectContext *)parentContext;
 - (void)syncScope:(id)scope;
 
 @end
@@ -118,7 +120,7 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 - (ORMLoad *)load;
 - (ORMLoad *)load:(VoidBlock)completion;
 
-- (__kindof ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes;
-- (__kindof ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes completion:(VoidBlock)completion;
+- (__kindof ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes parentContext:(ORMManagedObjectContext *)parentContext;
+- (__kindof ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes parentContext:(ORMManagedObjectContext *)parentContext completion:(VoidBlock)completion;
 
 @end

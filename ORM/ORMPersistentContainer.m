@@ -23,8 +23,7 @@
 - (instancetype)initWithName:(NSString *)name managedObjectModel:(NSManagedObjectModel *)model {
     self = [super initWithName:name managedObjectModel:model];
     if (self) {
-        self.context = [ORMManagedObjectContext.alloc initWithConcurrencyType:NSMainQueueConcurrencyType];
-        self.context.parentContext = [self contextWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        self.context = [self contextWithConcurrencyType:NSMainQueueConcurrencyType parentContext:nil];
     }
     return self;
 }
@@ -36,9 +35,13 @@
     return self;
 }
 
-- (ORMManagedObjectContext *)contextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct {
-    ORMManagedObjectContext *context = [ORMManagedObjectContext.alloc initWithConcurrencyType:ct];
-    context.persistentStoreCoordinator = self.persistentStoreCoordinator;
+- (ORMManagedObjectContext *)contextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType parentContext:(ORMManagedObjectContext *)parentContext {
+    ORMManagedObjectContext *context = [ORMManagedObjectContext.alloc initWithConcurrencyType:concurrencyType];
+    if (parentContext) {
+        context.parentContext = parentContext;
+    } else {
+        context.persistentStoreCoordinator = self.persistentStoreCoordinator;
+    }
     return context;
 }
 

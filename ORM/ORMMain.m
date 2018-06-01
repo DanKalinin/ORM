@@ -89,6 +89,8 @@
 @interface ORMSync ()
 
 @property NSMutableArray<id> *scopes;
+@property ORMManagedObjectContext *parentContext;
+@property ORMManagedObjectContext *context;
 
 @end
 
@@ -99,10 +101,11 @@
 @dynamic parent;
 @dynamic delegates;
 
-- (instancetype)initWithScopes:(NSMutableArray<id> *)scopes {
+- (instancetype)initWithScopes:(NSMutableArray<id> *)scopes parentContext:(ORMManagedObjectContext *)parentContext {
     self = super.init;
     if (self) {
         self.scopes = scopes;
+        self.parentContext = parentContext;
         
         self.progress.totalUnitCount = scopes.count;
     }
@@ -110,7 +113,8 @@
 }
 
 - (void)main {
-    [self.parent.container.context.parentContext performBlockAndWait:^{
+    self.context = [self.parent.container contextWithConcurrencyType:NSPrivateQueueConcurrencyType parentContext:self.parentContext];
+    [self.context performBlockAndWait:^{
         [self updateState:HLPOperationStateDidBegin];
         [self updateProgress:0];
         
@@ -134,7 +138,7 @@
         } else {
             if (self.errors.count == 0) {
                 NSError *error = nil;
-                if ([self.parent.container.context.parentContext save:&error]) {
+                if ([self.context save:&error]) {
                 } else {
                     [self.errors addObject:error];
                 }
@@ -191,7 +195,7 @@
     NSURL *url = [scope.bundle URLForResource:[scope entity].name withExtension:ExtensionPlist];
     NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:url];
     for (NSMutableDictionary *dictionary in array) {
-        NSManagedObject<HLPDictionaryDecodable> *object = [scope.alloc initWithContext:self.parent.container.context.parentContext];
+        NSManagedObject<HLPDictionaryDecodable> *object = [scope.alloc initWithContext:self.context];
         [object fromDictionary:dictionary];
     }
 }
@@ -229,14 +233,14 @@
     return load;
 }
 
-- (ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes {
-    ORMSync *sync = [syncClass.alloc initWithScopes:scopes];
+- (ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes parentContext:(ORMManagedObjectContext *)parentContext {
+    ORMSync *sync = [syncClass.alloc initWithScopes:scopes parentContext:parentContext];
     [self addOperation:sync];
     return sync;
 }
 
-- (ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes completion:(VoidBlock)completion {
-    ORMSync *sync = [self sync:syncClass scopes:scopes];
+- (ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes parentContext:(ORMManagedObjectContext *)parentContext completion:(VoidBlock)completion {
+    ORMSync *sync = [self sync:syncClass scopes:scopes parentContext:parentContext];
     sync.completionBlock = completion;
     return sync;
 }

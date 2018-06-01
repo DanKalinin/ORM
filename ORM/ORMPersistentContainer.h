@@ -17,6 +17,6 @@
 @property (readonly) ORMManagedObjectContext *context;
 
 - (instancetype)initWithName:(NSString *)name bundle:(NSBundle *)bundle;
-- (ORMManagedObjectContext *)contextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct;
+- (ORMManagedObjectContext *)contextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType parentContext:(ORMManagedObjectContext *)parentContext;
 
 @end

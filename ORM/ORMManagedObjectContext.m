@@ -62,16 +62,4 @@
     }
 }
 
-- (BOOL)commit:(NSError **)error {
-    NSManagedObjectContext *context = self;
-    while (context) {
-        if ([context save:error]) {
-            context = context.parentContext;
-        } else {
-            return NO;
-        }
-    }
-    return YES;
-}
-
 @end

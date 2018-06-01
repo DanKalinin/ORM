@@ -34,6 +34,5 @@
 @interface NSManagedObjectContext (ORM)
 
 - (__kindof NSManagedObject *)findOrCreate:(NSFetchRequest *)request error:(NSError **)error;
-- (BOOL)commit:(NSError **)error;
 
 @end
