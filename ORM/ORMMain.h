@@ -105,7 +105,7 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 
 
 
-@protocol ORMDelegate <HLPOperationDelegate>
+@protocol ORMDelegate <ORMLoadDelegate, ORMSyncDelegate>
 
 @end
 
