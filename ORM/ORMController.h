@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger, ORMChangeKind) {
 
 
 
-@interface ORMTableViewController : TableViewController <NSFetchedResultsControllerDelegate>
+@interface ORMTableViewController : CTLTableViewController <NSFetchedResultsControllerDelegate>
 
 @property NSFetchedResultsController *controller;
 @property BOOL userDrivenChange;
@@ -67,7 +67,7 @@ typedef NS_ENUM(NSUInteger, ORMChangeKind) {
 
 
 
-@interface ORMCollectionViewController : CollectionViewController <NSFetchedResultsControllerDelegate>
+@interface ORMCollectionViewController : CTLCollectionViewController <NSFetchedResultsControllerDelegate>
 
 @property NSFetchedResultsController *controller;
 @property BOOL userDrivenChange;
