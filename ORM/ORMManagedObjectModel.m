@@ -14,12 +14,12 @@
 
 + (void)load {
     SEL original = @selector(fetchRequestFromTemplateWithName:substitutionVariables:);
-    SEL swizzled = @selector(ORM_NSManagedObjectModel_fetchRequestFromTemplateWithName:substitutionVariables:);
+    SEL swizzled = @selector(ORMManagedObjectModelFetchRequestFromTemplateWithName:substitutionVariables:);
     [self swizzleInstanceMethod:original with:swizzled];
 }
 
-- (NSFetchRequest *)ORM_NSManagedObjectModel_fetchRequestFromTemplateWithName:(NSString *)name substitutionVariables:(NSDictionary<NSString *, id> *)variables {
-    NSFetchRequest *request = [self ORM_NSManagedObjectModel_fetchRequestFromTemplateWithName:name substitutionVariables:variables];
+- (NSFetchRequest *)ORMManagedObjectModelFetchRequestFromTemplateWithName:(NSString *)name substitutionVariables:(NSDictionary<NSString *, id> *)variables {
+    NSFetchRequest *request = [self ORMManagedObjectModelFetchRequestFromTemplateWithName:name substitutionVariables:variables];
     NSString *key = [NSString stringWithFormat:@"%@.%@", NSStringFromClass(NSFetchRequest.class), name];
     NSString *value = request.entity.userInfo[key];
     if (value) {
