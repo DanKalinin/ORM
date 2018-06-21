@@ -39,7 +39,7 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 
 @interface ORMLoad : HLPOperation <ORMLoadDelegate>
 
-@property (readonly) SurrogateArray<ORMLoadDelegate> *delegates;
+@property (readonly) HLPArray<ORMLoadDelegate> *delegates;
 @property (readonly) ORMPersistentContainer *container;
 
 - (instancetype)initWithContainer:(ORMPersistentContainer *)container;
@@ -73,7 +73,7 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 @interface ORMSync : HLPOperation <ORMSyncDelegate>
 
 @property (readonly) ORM *parent;
-@property (readonly) SurrogateArray<ORMSyncDelegate> *delegates;
+@property (readonly) HLPArray<ORMSyncDelegate> *delegates;
 @property (readonly) NSMutableArray<id> *scopes;
 @property (readonly) ORMManagedObjectContext *parentContext;
 @property (readonly) ORMManagedObjectContext *context;
@@ -115,7 +115,7 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 
 @property ORMPersistentContainer *container;
 
-@property (readonly) SurrogateArray<ORMDelegate> *delegates;
+@property (readonly) HLPArray<ORMDelegate> *delegates;
 
 - (ORMLoad *)load;
 - (ORMLoad *)load:(VoidBlock)completion;
