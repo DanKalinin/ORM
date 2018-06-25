@@ -118,9 +118,9 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 @property (readonly) HLPArray<ORMDelegate> *delegates;
 
 - (ORMLoad *)load;
-- (ORMLoad *)load:(VoidBlock)completion;
+- (ORMLoad *)load:(HLPVoidBlock)completion;
 
 - (__kindof ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes parentContext:(ORMManagedObjectContext *)parentContext;
-- (__kindof ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes parentContext:(ORMManagedObjectContext *)parentContext completion:(VoidBlock)completion;
+- (__kindof ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes parentContext:(ORMManagedObjectContext *)parentContext completion:(HLPVoidBlock)completion;
 
 @end

@@ -227,7 +227,7 @@
     return load;
 }
 
-- (ORMLoad *)load:(VoidBlock)completion {
+- (ORMLoad *)load:(HLPVoidBlock)completion {
     ORMLoad *load = [self load];
     load.completionBlock = completion;
     return load;
@@ -239,7 +239,7 @@
     return sync;
 }
 
-- (ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes parentContext:(ORMManagedObjectContext *)parentContext completion:(VoidBlock)completion {
+- (ORMSync *)sync:(Class)syncClass scopes:(NSMutableArray<id> *)scopes parentContext:(ORMManagedObjectContext *)parentContext completion:(HLPVoidBlock)completion {
     ORMSync *sync = [self sync:syncClass scopes:scopes parentContext:parentContext];
     sync.completionBlock = completion;
     return sync;
