@@ -32,13 +32,13 @@
     self = super.init;
     if (self) {
         self.container = container;
-        
-        self.progress.totalUnitCount = container.persistentStoreDescriptions.count;
     }
     return self;
 }
 
 - (void)main {
+    self.progress.totalUnitCount = self.container.persistentStoreDescriptions.count;
+    
     [self updateState:HLPOperationStateDidBegin];
     [self updateProgress:0];
     
@@ -106,8 +106,6 @@
     if (self) {
         self.scopes = scopes;
         self.parentContext = parentContext;
-        
-        self.progress.totalUnitCount = scopes.count;
     }
     return self;
 }
@@ -115,6 +113,8 @@
 - (void)main {
     self.context = [self.parent.container contextWithConcurrencyType:NSPrivateQueueConcurrencyType parentContext:self.parentContext];
     [self.context performBlockAndWait:^{
+        self.progress.totalUnitCount = self.scopes.count;
+        
         [self updateState:HLPOperationStateDidBegin];
         [self updateProgress:0];
         
