@@ -6,6 +6,7 @@
 //
 
 #import <CoreData/CoreData.h>
+#import <Helpers/Helpers.h>
 #import "ORMManagedObjectContext.h"
 
 @class ORMPersistentContainer;

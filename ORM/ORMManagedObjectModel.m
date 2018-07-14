@@ -6,7 +6,6 @@
 //
 
 #import "ORMManagedObjectModel.h"
-#import <Helpers/Helpers.h>
 
 
 

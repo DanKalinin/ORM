@@ -6,6 +6,7 @@
 //
 
 #import <CoreData/CoreData.h>
+#import <Helpers/Helpers.h>
 
 
 
