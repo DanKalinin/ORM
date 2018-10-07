@@ -111,7 +111,7 @@ typedef NSString * ORMScope NS_STRING_ENUM;
 
 
 
-@interface ORM : HLPOperation <ORMDelegate>
+@interface ORM : HLPOperationQueue <ORMDelegate>
 
 @property ORMPersistentContainer *container;
 
