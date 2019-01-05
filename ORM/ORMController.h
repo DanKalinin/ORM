@@ -6,7 +6,7 @@
 //
 
 #import <CoreData/CoreData.h>
-#import <Controls/Controls.h>
+#import <UIKitExt/UIKitExt.h>
 
 //@class ORMChange, ORMTableViewController;
 //
